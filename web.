@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTIEUBAO.NET - DỊCH VỤ MẠNG XÃ HỘI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(102, 126, 234, 0.3);
+            border-bottom: 2px solid #667eea;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #667eea;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 150px 20px 100px;
+            text-align: center;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.2s both;
+            color: #b0b0b0;
+        }
+
+        /* Contact Buttons */
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+            margin-top: 2rem;
+        }
+
+        .contact-btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            border: 2px solid transparent;
+        }
+
+        .btn-zalo {
+            background: linear-gradient(135deg, #0068ff 0%, #0084ff 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(0, 104, 255, 0.4);
+        }
+
+        .btn-zalo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 104, 255, 0.6);
+        }
+
+        .btn-telegram {
+            background: linear-gradient(135deg, #0088cc 0%, #00a1e0 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(0, 136, 204, 0.4);
+        }
+
+        .btn-telegram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.6);
+        }
+
+        .btn-facebook {
+            background: linear-gradient(135deg, #1877f2 0%, #42a5f5 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(24, 119, 242, 0.4);
+        }
+
+        .btn-facebook:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.6);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 20px;
+            background: #0f0f0f;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title p {
+            color: #b0b0b0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .services-categories {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .service-category {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid #667eea;
+            box-shadow: 0 5px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .service-category h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .service-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            transform: translateX(5px);
+        }
+
+        .service-item h4 {
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+
+        .service-price {
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            text-align: center;
+            border-top: 2px solid #667eea;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #b0b0b0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            border: 1px solid #667eea;
+            min-width: 250px;
+        }
+
+        .contact-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #b0b0b0;
+            padding: 60px 20px 20px;
+            border-top: 2px solid #667eea;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .service-items {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">HOTIEUBAO.NET</a>
+            <ul class="nav-links">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#services">Bảng giá</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Dịch Vụ MXH HaToKi Media</h1>
+            <p>Khám phá các dịch vụ chuyên sâu giúp bạn có được nhiều kiến thức bổ ích về MXH và tiếp thị số. Từ các TUT Trick khai thác, bảo mật đến chiến lược quảng cáo bán hàng hiệu quả.</p>
+            
+            <div class="contact-buttons">
+                <a href="https://zalo.me/0978809934" class="contact-btn btn-zalo" target="_blank">
+                    📱 Nhắn Zalo
+                </a>
+                <a href="https://t.me/hotieubao03" class="contact-btn btn-telegram" target="_blank">
+                    ✈️ Telegram
+                </a>
+                <a href="https://facebook.com/hatokimedia" class="contact-btn btn-facebook" target="_blank">
+                    📘 Facebook
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>BẢNG GIÁ DỊCH VỤ MXH</h2>
+                <p>Bảng giá chi tiết đầy đủ các dịch vụ mạng xã hội chuyên nghiệp</p>
+            </div>
+
+            <div class="services-categories">
+                <!-- Dame Account -->
+                <div class="service-category">
+                    <h3>💎 DAME ACCOUNT</h3>
+                    <div class="service-items">
+                        <div class="service-item">
+                            <h4>Dame Tài Khoản Facebook TCN Thường</h4>
+                            <div class="service-price">1.500.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Tài Khoản Facebook Chuyên Nghiệp</h4>
+                            <div class="service-price">1.700.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Tài Khoản Facebook Locked</h4>
+                            <div class="service-price">1.500.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Tài Khoản Facebook Không AVT</h4>
+                            <div class="service-price">1.900.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Fanpage Facebook</h4>
+                            <div class="service-price">3.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Group Facebook</h4>
+                            <div class="service-price">8.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Tài Khoản TikTok</h4>
+                            <div class="service-price">4.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Video TikTok</h4>
+                            <div class="service-price">3.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Tài Khoản Instagram</h4>
+                            <div class="service-price">2.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Tài Khoản Youtube</h4>
+                            <div class="service-price">9.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Video Youtube</h4>
+                            <div class="service-price">5.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dame Tài Khoản Threads</h4>
+                            <div class="service-price">2.500.000đ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unlock & Kháng Nghị -->
+                <div class="service-category">
+                    <h3>🔓 UNLOCK & KHÁNG NGHỊ</h3>
+                    <div class="service-items">
+                        <div class="service-item">
+                            <h4>Mở Khóa Facebook Dạng Két Chính Chủ</h4>
+                            <div class="service-price">650.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Mở Khóa Facebook Dạng Két Ko Chính Chủ</h4>
+                            <div class="service-price">2.500.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Mở Khóa Facebook Đình Chỉ Lần Đầu</h4>
+                            <div class="service-price">650.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Mở Khóa Facebook Đình Chỉ Lần 2 Trở Lên</h4>
+                            <div class="service-price">2.500.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Mở Khóa Facebook FAQ Vô Hiệu Hóa</h4>
+                            <div class="service-price">8.500.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Kháng Vi Phạm Facebook</h4>
+                            <div class="service-price">1.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Lấy Lại Facebook Bị Hack</h4>
+                            <div class="service-price">850.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Verify Bảo Vệ Tài Khoản Facebook</h4>
+                            <div class="service-price">2.500.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Mở Khóa TikTok Cấm Vĩnh Viễn</h4>
+                            <div class="service-price">3.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Mở Khóa TikTok Die Bản Quyền</h4>
+                            <div class="service-price">30.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Mở Khóa TikTok Giới Hạn Độ Tuổi</h4>
+                            <div class="service-price">650.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Khiếu Nại Video TikTok</h4>
+                            <div class="service-price">1.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Bảo Kê Tài Khoản TikTok</h4>
+                            <div class="service-price">Thương Lượng</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tài Khoản Agency TikTok</h4>
+                            <div class="service-price">5.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Mở Khóa Tài Khoản Instagram</h4>
+                            <div class="service-price">950.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Kháng Nghị Video Youtube</h4>
+                            <div class="service-price">3.000.000đ - 5.000.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Kháng Nghị Bài viết Instagram</h4>
+                            <div class="service-price">900.000đ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tick Xanh -->
+                <div class="service-category">
+                    <h3>✅ DỊCH VỤ TICK XANH</h3>
+                    <div class="service-items">
+                        <div class="service-item">
+                            <h4>Lên Tick Xanh Profile Facebook KBH</h4>
+                            <div class="service-price">999.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Lên Tick Xanh Profile Facebook BH</h4>
+                            <div class="service-price">1.850.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Lên Tick Xanh Profile Facebook Chính Chủ KBH</h4>
+                            <div class="service-price">3.600.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Lên Tick Xanh Profile Facebook Chính Chủ BH</h4>
+                            <div class="service-price">5.500.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Lên Tick Xanh Profile Instagram BH</h4>
+                            <div class="service-price">3.850.000đ</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Lên Tick Xanh Profile Instagram Chính Chủ BH</h4>
+                            <div class="service-price">7.500.000đ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tăng Tương Tác Facebook -->
+                <div class="service-category">
+                    <h3>📱 DỊCH VỤ TĂNG TƯƠNG TÁC FACEBOOK</h3>
+                    <div class="service-items">
+                        <div class="service-item">
+                            <h4>Tăng Like Facebook</h4>
+                            <div class="service-price">180.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Follow Facebook</h4>
+                            <div class="service-price">180.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Mắt Live Facebook</h4>
+                            <div class="service-price">380.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Đánh Giá Fanpage</h4>
+                            <div class="service-price">280.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng View Story</h4>
+                            <div class="service-price">100.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Tương Tác Toàn Diện</h4>
+                            <div class="service-price">7.800.000đ / Trọn Gói</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tăng Tương Tác TikTok -->
+                <div class="service-category">
+                    <h3>🎵 DỊCH VỤ TĂNG TƯƠNG TÁC TIKTOK</h3>
+                    <div class="service-items">
+                        <div class="service-item">
+                            <h4>Tăng Tim TikTok</h4>
+                            <div class="service-price">180.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Follow TikTok</h4>
+                            <div class="service-price">180.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Mắt Live TikTok</h4>
+                            <div class="service-price">380.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng View TikTok</h4>
+                            <div class="service-price">10.000đ / 1000 Tương Tác</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tăng Tương Tác Instagram -->
+                <div class="service-category">
+                    <h3>📷 DỊCH VỤ TĂNG TƯƠNG TÁC INSTAGRAM</h3>
+                    <div class="service-items">
+                        <div class="service-item">
+                            <h4>Tăng Tim Instagram</h4>
+                            <div class="service-price">180.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Follow Instagram</h4>
+                            <div class="service-price">180.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Mắt Live Instagram</h4>
+                            <div class="service-price">380.000đ / 1000 Tương Tác</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng View Instagram</h4>
+                            <div class="service-price">100.000đ / 1000 Tương Tác</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tương Tác Khác -->
+                <div class="service-category">
+                    <h3>🛍️ DỊCH VỤ TĂNG TƯƠNG TÁC KHÁC</h3>
+                    <div class="service-items">
+                        <div class="service-item">
+                            <h4>Tăng Follow Shopee</h4>
+                            <div class="service-price">Thương Lượng</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Tim Shopee</h4>
+                            <div class="service-price">Thương Lượng</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Mắt Live Shopee</h4>
+                            <div class="service-price">Thương Lượng</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tăng Đánh Giá Google Maps</h4>
+                            <div class="service-price">Thương Lượng</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Xác minh Google Maps</h4>
+                            <div class="service-price">Thương Lượng</div>
+                        </div>
+                        <div class="service-item">
+                            <h4>Dịch Vụ Telegram</h4>
+                            <div class="service-price">Thương Lượng</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quảng Cáo -->
+                <div class="service-category">
+                    <h3>📢 DỊCH VỤ QUẢNG CÁO</h3>
+                    <div class="service-items">
+                        <div class="service-item">
+                            <h4>Chạy Quảng Cáo Facebook</h4>
+                            <div class="service-price">min 1.000.000đ / 1
