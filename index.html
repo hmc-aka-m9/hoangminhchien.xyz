@@ -54,10 +54,76 @@
         }
 
         body.dark-mode {
-            --dark: #f5f5f5;
-            --darker: #ffffff;
-            --light: #0a0e27;
+            --dark: #1a202c;
+            --darker: #f7fafc;
+            --light: #1a202c;
             --gray: #4a5568;
+            background: #f7fafc;
+            color: #1a202c;
+        }
+        
+        body.dark-mode .animated-bg {
+            background: #f7fafc;
+        }
+        
+        body.dark-mode .animated-bg::before {
+            opacity: 0.5;
+        }
+        
+        body.dark-mode header {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        body.dark-mode .logo {
+            -webkit-text-fill-color: transparent;
+        }
+        
+        body.dark-mode nav a {
+            color: #4a5568;
+        }
+        
+        body.dark-mode nav a:hover {
+            color: #667eea;
+        }
+        
+        body.dark-mode .hero p,
+        body.dark-mode .section-header p,
+        body.dark-mode .feature-card p,
+        body.dark-mode .trust-badge p,
+        body.dark-mode .stat-label,
+        body.dark-mode .faq-answer p,
+        body.dark-mode .testimonial-card p,
+        body.dark-mode .footer-section p,
+        body.dark-mode .service-item .price {
+            color: #4a5568;
+        }
+        
+        body.dark-mode .feature-card,
+        body.dark-mode .service-category,
+        body.dark-mode .service-item,
+        body.dark-mode .pricing-card,
+        body.dark-mode .testimonial-card,
+        body.dark-mode .faq-item,
+        body.dark-mode .trust-badge,
+        body.dark-mode .process-content {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        body.dark-mode .stats-section {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        body.dark-mode footer {
+            background: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        body.dark-mode .dark-mode-toggle {
+            background: rgba(0, 0, 0, 0.1);
+            color: #1a202c;
         }
 
         /* Animated Background */
@@ -101,7 +167,7 @@
             transition: width 0.1s ease;
         }
 
-        /* Loading Screen */
+        /* Loading Screen - Disabled */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -109,7 +175,7 @@
             width: 100%;
             height: 100%;
             background: var(--darker);
-            display: flex;
+            display: none; /* Disabled by default */
             align-items: center;
             justify-content: center;
             z-index: 99999;
@@ -1031,12 +1097,17 @@
 
         /* Scroll Animations */
         .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
             transition: all 0.8s ease;
         }
 
-        .scroll-reveal.active {
+        .scroll-reveal.animated {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .scroll-reveal.animated.active {
             opacity: 1;
             transform: translateY(0);
         }
@@ -1044,8 +1115,8 @@
         /* Ensure content is visible if JS fails */
         @media (prefers-reduced-motion: reduce) {
             .scroll-reveal {
-                opacity: 1;
-                transform: none;
+                opacity: 1 !important;
+                transform: none !important;
             }
         }
 
@@ -1161,11 +1232,6 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <div class="loader"></div>
-    </div>
-
     <!-- Scroll Progress -->
     <div class="scroll-progress"></div>
 
@@ -2254,20 +2320,14 @@
     </div>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Loading Screen
+        // Loading Screen - Disabled
         window.addEventListener('load', () => {
+            // Enable scroll animations after page loads
             setTimeout(() => {
-                document.querySelector('.loading-screen').classList.add('hide');
-                // Fallback: make all content visible after 2 seconds
-                setTimeout(() => {
-                    document.querySelectorAll('.scroll-reveal').forEach(el => {
-                        if (!el.classList.contains('active')) {
-                            el.style.opacity = '1';
-                            el.style.transform = 'translateY(0)';
-                        }
-                    });
-                }, 2000);
-            }, 1000);
+                document.querySelectorAll('.scroll-reveal').forEach(el => {
+                    el.classList.add('animated');
+                });
+            }, 100);
         });
 
         // Scroll Progress Bar
@@ -2336,7 +2396,10 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+        // Add scroll reveal to elements that have the animated class
+        setTimeout(() => {
+            document.querySelectorAll('.scroll-reveal.animated').forEach(el => observer.observe(el));
+        }, 200);
 
         // Counter Animation
         const counters = document.querySelectorAll('.stat-number');
