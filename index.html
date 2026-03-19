@@ -1,626 +1,689 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chiến Tricker – Dịch Vụ Mxh</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --surface: #111;
-    --surface2: #181818;
-    --gold: #f5c518;
-    --gold2: #e0a800;
-    --red: #e63946;
-    --green: #2ecc71;
-    --text: #f0f0f0;
-    --muted: #888;
-    --border: #2a2a2a;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chiến Tricker – Dịch Vụ Mxh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #1877f2;
+      --blue-dark: #0d5fcc;
+      --blue-light: #4a9eff;
+      --gold: #f5a623;
+      --gold-light: #ffd166;
+      --bg: #0a0e1a;
+      --bg2: #0f1525;
+      --bg3: #141b30;
+      --card: #161d33;
+      --card2: #1c2540;
+      --border: rgba(24,119,242,0.18);
+      --text: #e8eaf6;
+      --muted: #8892b0;
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Be Vietnam Pro', sans-serif;
-    overflow-x: hidden;
-  }
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem; font-weight: 900;
+      color: var(--blue-light);
+      letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .88rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--blue-light); }
 
-  /* ── HERO ── */
-  header {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 20px;
-    overflow: hidden;
-  }
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(24,119,242,.25), transparent),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(245,166,35,.08), transparent),
+        var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(24,119,242,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,119,242,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(24,119,242,.12);
+      border: 1px solid rgba(24,119,242,.35);
+      color: var(--blue-light);
+      font-size: .8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 50px;
+      margin-bottom: 28px;
+      animation: fadeUp .6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 0%, var(--blue-light) 50%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero p {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: var(--muted); max-width: 600px;
+      animation: fadeUp .7s .2s ease both;
+      margin-bottom: 40px;
+    }
+    .hero-btns {
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 50px;
+      font-size: .92rem; font-weight: 700; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer; border: none;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(24,119,242,.4);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 32px rgba(24,119,242,.55); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--blue);
+      color: var(--blue-light);
+    }
+    .btn-outline:hover { background: rgba(24,119,242,.1); }
 
-  header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,197,24,.18) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(230,57,70,.12) 0%, transparent 60%);
-    pointer-events: none;
-  }
+    /* ── SECTION COMMON ── */
+    section { padding: 90px 5%; }
+    .section-label {
+      display: inline-block;
+      font-size: .75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .section-sub { color: var(--muted); font-size: .95rem; margin-bottom: 50px; }
 
-  .grid-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(245,197,24,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(245,197,24,.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-  }
+    /* ── FACEBOOK SERVICES ── */
+    #services { background: var(--bg2); }
+    .fb-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 8px;
+    }
+    .fb-icon-big {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .service-count {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(24,119,242,.12); border: 1px solid rgba(24,119,242,.25);
+      color: var(--blue-light); font-size: .78rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 50px; letter-spacing: 1px;
+      margin-bottom: 36px;
+    }
 
-  .badge {
-    display: inline-block;
-    background: rgba(245,197,24,.12);
-    border: 1px solid rgba(245,197,24,.4);
-    color: var(--gold);
-    font-size: .75rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    padding: 6px 18px;
-    border-radius: 100px;
-    margin-bottom: 24px;
-    animation: fadeUp .6s ease both;
-  }
+    /* Grid cho 10 dịch vụ */
+    .fb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+    .fb-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .fb-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-light));
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .fb-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(24,119,242,.45);
+      box-shadow: 0 12px 40px rgba(24,119,242,.18);
+    }
+    .fb-card:hover::before { opacity: 1; }
 
-  h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 10vw, 110px);
-    letter-spacing: .03em;
-    line-height: .95;
-    animation: fadeUp .7s .1s ease both;
-  }
+    .fb-card-icon {
+      font-size: 1.8rem;
+      width: 48px; height: 48px;
+      background: rgba(24,119,242,.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fb-card-title {
+      font-size: .95rem; font-weight: 800;
+      color: #fff; line-height: 1.3;
+    }
+    .fb-card-desc {
+      font-size: .83rem; color: var(--muted); line-height: 1.5;
+    }
+    .fb-card-tag {
+      display: inline-flex; align-items: center;
+      background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.25);
+      color: var(--gold-light); font-size: .72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 50px;
+      width: fit-content; margin-top: 4px;
+    }
 
-  h1 span { color: var(--gold); }
+    /* ── TÀI CHÍNH ── */
+    #finance { background: var(--bg3); }
+    .finance-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .finance-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: 1.5px;
+      padding: 4px 12px; border-radius: 50px; text-transform: uppercase;
+      margin-left: 10px; vertical-align: middle;
+    }
+    .finance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px; margin-top: 24px;
+    }
+    .price-row {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px; text-align: center;
+    }
+    .price-row .amount { font-size: 1rem; font-weight: 800; color: var(--gold-light); }
+    .price-row .arrow { color: var(--muted); font-size: .8rem; margin: 4px 0; }
+    .price-row .receive { font-size: .88rem; font-weight: 700; color: #4ade80; }
+    .price-row .fee { font-size: .75rem; color: var(--muted); }
+    .finance-note {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;
+    }
+    .note-chip {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.2);
+      color: #4ade80; font-size: .78rem; font-weight: 600;
+      padding: 5px 12px; border-radius: 50px;
+    }
 
-  .sub {
-    margin-top: 16px;
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--muted);
-    font-weight: 300;
-    max-width: 560px;
-    animation: fadeUp .7s .2s ease both;
-  }
+    /* ── APP PREMIUM ── */
+    #apps { background: var(--bg2); }
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 20px;
+      text-align: center;
+      transition: transform .25s, border-color .25s;
+    }
+    .app-card:hover { transform: translateY(-4px); border-color: rgba(24,119,242,.4); }
+    .app-card .emoji { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+    .app-card h4 { font-size: .92rem; font-weight: 800; margin-bottom: 8px; }
+    .app-card p { font-size: .8rem; color: var(--muted); margin-bottom: 14px; }
+    .app-price {
+      font-size: .82rem; font-weight: 700; color: var(--blue-light);
+      background: rgba(24,119,242,.1); border-radius: 50px;
+      padding: 4px 12px; display: inline-block;
+    }
 
-  .cta-row {
-    margin-top: 36px;
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-    animation: fadeUp .7s .3s ease both;
-  }
+    /* ── COURSES ── */
+    #courses { background: var(--bg3); }
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .course-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: transform .25s, border-color .25s;
+    }
+    .course-card:hover { transform: translateY(-4px); border-color: rgba(245,166,35,.4); }
+    .course-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem; font-weight: 900;
+      color: rgba(24,119,242,.2);
+      line-height: 1;
+    }
+    .course-card h4 { font-size: .97rem; font-weight: 800; }
+    .course-card p { font-size: .83rem; color: var(--muted); flex: 1; }
+    .course-price {
+      font-size: .92rem; font-weight: 800;
+      color: var(--gold-light);
+    }
 
-  .btn-gold {
-    background: var(--gold);
-    color: #000;
-    font-weight: 800;
-    font-size: .95rem;
-    padding: 14px 32px;
-    border-radius: 8px;
-    text-decoration: none;
-    letter-spacing: .04em;
-    transition: background .2s, transform .15s;
-    border: none; cursor: pointer;
-  }
-  .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+    /* ── TOOLS / CUSTOM ── */
+    #tools { background: var(--bg2); }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: transform .25s, border-color .25s;
+    }
+    .tool-card:hover { transform: translateY(-4px); border-color: rgba(24,119,242,.4); }
+    .tool-card .icon { font-size: 2rem; }
+    .tool-card h4 { font-size: .97rem; font-weight: 800; }
+    .tool-card p { font-size: .83rem; color: var(--muted); flex: 1; }
+    .tool-price { font-size: .83rem; font-weight: 700; color: var(--blue-light); }
 
-  .btn-outline {
-    background: transparent;
-    color: var(--gold);
-    font-weight: 700;
-    font-size: .95rem;
-    padding: 14px 32px;
-    border-radius: 8px;
-    text-decoration: none;
-    letter-spacing: .04em;
-    border: 1.5px solid rgba(245,197,24,.5);
-    transition: border-color .2s, transform .15s;
-    cursor: pointer;
-  }
-  .btn-outline:hover { border-color: var(--gold); transform: translateY(-2px); }
+    /* ── CONTACT ── */
+    #contact {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(24,119,242,.15), transparent),
+        var(--bg);
+      text-align: center;
+    }
+    .contact-box {
+      max-width: 540px; margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 36px;
+    }
+    .contact-box h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem; font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .contact-box p { color: var(--muted); font-size: .9rem; margin-bottom: 28px; }
 
-  /* scroll arrow */
-  .scroll-hint {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    color: var(--muted);
-    font-size: .7rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    animation: pulse 2s infinite;
-  }
-  .scroll-hint svg { width: 22px; opacity: .6; }
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 30px 5%;
+      text-align: center;
+      color: var(--muted); font-size: .82rem;
+    }
+    footer span { color: var(--blue-light); font-weight: 700; }
 
-  /* ── SECTIONS ── */
-  section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
-  .section-label {
-    font-size: .7rem;
-    font-weight: 700;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 6vw, 64px);
-    line-height: 1;
-    margin-bottom: 48px;
-  }
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-  /* ── SERVICE GRID ── */
-  .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 18px;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 28px 24px;
-    transition: border-color .25s, transform .2s, box-shadow .25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .3s;
-  }
-  .card:hover { border-color: rgba(245,197,24,.35); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.4); }
-  .card:hover::before { transform: scaleX(1); }
-
-  .card-icon {
-    font-size: 2rem;
-    margin-bottom: 14px;
-  }
-  .card-name {
-    font-weight: 700;
-    font-size: 1.05rem;
-    margin-bottom: 8px;
-  }
-  .card-desc {
-    color: var(--muted);
-    font-size: .88rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  .price-tag {
-    display: inline-block;
-    background: rgba(245,197,24,.12);
-    border: 1px solid rgba(245,197,24,.3);
-    color: var(--gold);
-    font-weight: 800;
-    font-size: .95rem;
-    padding: 6px 16px;
-    border-radius: 6px;
-  }
-  .price-tag.red {
-    background: rgba(230,57,70,.12);
-    border-color: rgba(230,57,70,.3);
-    color: var(--red);
-  }
-  .price-tag.green {
-    background: rgba(46,204,113,.12);
-    border-color: rgba(46,204,113,.3);
-    color: var(--green);
-  }
-
-  /* ── SPECIAL CARD (gạch thẻ cào) ── */
-  .card.special {
-    border-color: rgba(46,204,113,.4);
-    background: linear-gradient(135deg, #0f1f16 0%, var(--surface) 100%);
-    grid-column: 1 / -1;
-  }
-  .card.special::before { background: var(--green); }
-  .card.special .card-name { font-size: 1.2rem; }
-  .card.special .badge-hot {
-    display: inline-block;
-    background: var(--red);
-    color: #fff;
-    font-size: .65rem;
-    font-weight: 800;
-    letter-spacing: .12em;
-    padding: 3px 10px;
-    border-radius: 100px;
-    margin-left: 10px;
-    vertical-align: middle;
-    text-transform: uppercase;
-    animation: blink 1.4s infinite;
-  }
-
-  .gachu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .gachu-item {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .gachu-item .label { color: var(--muted); font-size: .78rem; }
-  .gachu-item .original { font-weight: 600; font-size: 1rem; }
-  .gachu-item .received { color: var(--green); font-weight: 800; font-size: 1rem; }
-  .gachu-item .fee { color: var(--muted); font-size: .75rem; }
-
-  /* ── COURSES ── */
-  .course-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    transition: border-color .25s, transform .2s;
-  }
-  .course-card:hover { border-color: rgba(245,197,24,.35); transform: translateX(6px); }
-  .course-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: rgba(245,197,24,.2);
-    min-width: 48px;
-    line-height: 1;
-  }
-  .course-info { flex: 1; }
-  .course-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
-  .course-desc { color: var(--muted); font-size: .88rem; line-height: 1.6; margin-bottom: 12px; }
-
-  /* ── CUSTOM WORK ── */
-  .custom-box {
-    background: linear-gradient(135deg, #1a1200 0%, var(--surface) 100%);
-    border: 1px solid rgba(245,197,24,.25);
-    border-radius: 14px;
-    padding: 40px 36px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .custom-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 8px; }
-  .custom-box p { color: var(--muted); max-width: 480px; line-height: 1.7; }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 40px 20px;
-    text-align: center;
-  }
-  footer .brand {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    color: var(--gold);
-    letter-spacing: .06em;
-  }
-  footer .tagline { color: var(--muted); font-size: .85rem; margin-top: 6px; }
-
-  /* ── DIVIDER ── */
-  .divider { border: none; border-top: 1px solid var(--border); margin: 0 auto; max-width: 1100px; }
-
-  /* ── KEYFRAMES ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: .5; } 50% { opacity: 1; }
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; } 50% { opacity: .4; }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    section { padding: 60px 16px; }
-    .custom-box { padding: 28px 20px; }
-    .custom-box a { width: 100%; text-align: center; }
-  }
-</style>
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 4%; }
+      .nav-links { display: none; }
+      section { padding: 60px 4%; }
+      .hero { padding: 90px 4% 50px; }
+      .hero h1 { font-size: 1.9rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ══════════ HERO ══════════ -->
-<header>
-  <div class="grid-bg"></div>
-  <div class="badge">⚡ Dịch Vụ Mạng Xã Hội Uy Tín Số 1</div>
-  <h1>HOÀNG MINH<br><span>CHIẾN TRICKER</span></h1>
-  <p class="sub">Hoàng Đế trong giới Tricker – Hacker | Giải pháp toàn diện về Facebook, AI, Lập trình & Tài chính số</p>
-  <div class="cta-row">
-    <a class="btn-gold" href="#services">Xem Dịch Vụ</a>
-    <a class="btn-outline" href="#contact">Liên Hệ Ngay</a>
-  </div>
-  <div class="scroll-hint">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    cuộn xuống
-  </div>
-</header>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">⚡ HMC TRICKER</div>
+  <ul class="nav-links">
+    <li><a href="#services">Facebook</a></li>
+    <li><a href="#finance">Tài Chính</a></li>
+    <li><a href="#apps">App Premium</a></li>
+    <li><a href="#courses">Khóa Học</a></li>
+    <li><a href="#tools">Tool & Web</a></li>
+    <li><a href="#contact">Liên Hệ</a></li>
+  </ul>
+</nav>
 
-<!-- ══════════ FACEBOOK SERVICES ══════════ -->
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⚡ Dịch Vụ Mạng Xã Hội Uy Tín Số 1</div>
+  <h1>HOÀNG MINH CHIẾN TRICKER</h1>
+  <p>Hoàng Đế trong giới Tricker – Hacker | Giải pháp toàn diện về Facebook, AI, Lập trình &amp; Tài chính số</p>
+  <div class="hero-btns">
+    <a href="#services" class="btn btn-primary">🔥 Xem Dịch Vụ</a>
+    <a href="#contact" class="btn btn-outline">💬 Liên Hệ Ngay</a>
+  </div>
+</section>
+
+<!-- FACEBOOK SERVICES -->
 <section id="services">
-  <p class="section-label">Facebook & Tài Khoản</p>
-  <h2 class="section-title">DỊCH VỤ<br>FACEBOOK</h2>
-  <div class="grid-3">
+  <div class="section-label">Facebook &amp; Tài Khoản</div>
+  <div class="fb-header">
+    <div class="fb-icon-big">📘</div>
+    <h2 class="section-title">DỊCH VỤ FACEBOOK</h2>
+  </div>
+  <p class="section-sub">Cung cấp đa dạng các gói dịch vụ chất lượng cao — uy tín, chuyên nghiệp, hoàn tiền nếu thất bại.</p>
+  <div class="service-count">📋 &nbsp;11 DỊCH VỤ ĐANG CÓ</div>
 
-    <div class="card">
-      <div class="card-icon">🤖</div>
-      <div class="card-name">Tăng Tương Tác Ảo</div>
-      <div class="card-desc">Like, comment, share, follow tự động bằng bot. Tăng nhanh độ phủ sóng cho bài viết và fanpage.</div>
-      <span class="price-tag">Từ 10.000đ / gói</span>
+  <div class="fb-grid">
+
+    <!-- 1 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">🔑</div>
+      <div class="fb-card-title">Lấy Lại Facebook Bị Hack</div>
+      <div class="fb-card-desc">Khôi phục tài khoản Facebook bị chiếm đoạt, hack, mất quyền truy cập. Cam kết hoàn tiền nếu thất bại.</div>
+      <div class="fb-card-tag">🔥 Phổ biến</div>
     </div>
 
-    <div class="card">
-      <div class="card-icon">👥</div>
-      <div class="card-name">Tăng Tương Tác Người Thật</div>
-      <div class="card-desc">Tương tác từ tài khoản người thật, an toàn, bền vững. Phù hợp fanpage thương hiệu, shop online.</div>
-      <span class="price-tag">Từ 25.000đ / gói</span>
+    <!-- 2 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">🟣</div>
+      <div class="fb-card-title">Mở Khoá FB Dạng 956 (Két Sắt Tím &amp; Ổ Khoá Tím)</div>
+      <div class="fb-card-desc">Xử lý chuyên biệt các dạng khoá 956 — két sắt tím và ổ khoá tím. Tỷ lệ thành công cao.</div>
+      <div class="fb-card-tag">⚡ Chuyên sâu</div>
     </div>
 
-    <div class="card">
-      <div class="card-icon">💣</div>
-      <div class="card-name">Dame Facebook, Bài Viết, Nhóm FB</div>
-      <div class="card-desc">Report, hạn chế hoặc hỗ trợ xử lý các tài khoản, bài viết và nhóm Facebook theo yêu cầu.</div>
-      <span class="price-tag red">Liên hệ báo giá</span>
+    <!-- 3 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">🛡️</div>
+      <div class="fb-card-title">Verify Bảo Vệ Tài Khoản Facebook</div>
+      <div class="fb-card-desc">Xác minh &amp; gia cố bảo mật tài khoản, chống hack, chống phishing, thiết lập 2FA chuẩn.</div>
+      <div class="fb-card-tag">✅ An toàn</div>
     </div>
 
-    <div class="card">
-      <div class="card-icon">🔓</div>
-      <div class="card-name">Mở Khoá / Gỡ Hạn Chế Tài Khoản</div>
-      <div class="card-desc">Khôi phục tài khoản bị khoá, checkpoint, hạn chế đăng bài, hạn chế quảng cáo. Cam kết hoàn tiền nếu thất bại.</div>
-      <span class="price-tag">Từ 150.000đ</span>
+    <!-- 4 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">👥</div>
+      <div class="fb-card-title">Chọc Bạn Bè Facebook</div>
+      <div class="fb-card-desc">Dịch vụ tương tác, kết bạn mở rộng mạng lưới bạn bè Facebook theo yêu cầu.</div>
+      <div class="fb-card-tag">💬 Tương tác</div>
     </div>
 
-    <div class="card">
-      <div class="card-icon">🛡️</div>
-      <div class="card-name">Bảo Vệ Tài Khoản Facebook</div>
-      <div class="card-desc">Gia cố bảo mật 2FA, chống phishing, chống hack. Bảo vệ tài khoản kinh doanh và cá nhân quan trọng.</div>
-      <span class="price-tag">Từ 100.000đ</span>
+    <!-- 5 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">🧹</div>
+      <div class="fb-card-title">Lọc Bạn Bè Facebook</div>
+      <div class="fb-card-desc">Tự động phát hiện và lọc bạn bè ảo, không tương tác, giúp tài khoản sạch và hiệu quả hơn.</div>
+      <div class="fb-card-tag">🤖 Tự động</div>
+    </div>
+
+    <!-- 6 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">📚</div>
+      <div class="fb-card-title">Tut &amp; Trick FB</div>
+      <div class="fb-card-desc">Cung cấp tài liệu, hướng dẫn (tutorial) và các trick Facebook mới nhất, cập nhật liên tục.</div>
+      <div class="fb-card-tag">📖 Tài liệu</div>
+    </div>
+
+    <!-- 7 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">✔️</div>
+      <div class="fb-card-title">Auto Lên Tick Xanh Facebook (New Profile)</div>
+      <div class="fb-card-desc">Dịch vụ hỗ trợ xác minh tick xanh Facebook cho profile mới — nhanh, uy tín, chuyên nghiệp.</div>
+      <div class="fb-card-tag">💎 Premium</div>
+    </div>
+
+    <!-- 8 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">🏅</div>
+      <div class="fb-card-title">Auto Lên Tick Xanh Facebook (Chính Chủ)</div>
+      <div class="fb-card-desc">Xác minh tick xanh cho tài khoản chính chủ, đủ điều kiện. Quy trình chuẩn, bảo mật thông tin.</div>
+      <div class="fb-card-tag">👑 Chính chủ</div>
+    </div>
+
+    <!-- 9 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">⚙️</div>
+      <div class="fb-card-title">Auto Script Facebook</div>
+      <div class="fb-card-desc">Cung cấp các script tự động hóa hoạt động Facebook: đăng bài, tương tác, quản lý tài khoản.</div>
+      <div class="fb-card-tag">🤖 Automation</div>
+    </div>
+
+    <!-- 10 -->
+    <div class="fb-card">
+      <div class="fb-card-icon">🔓</div>
+      <div class="fb-card-title">Mở Khoá Đình Chỉ Facebook</div>
+      <div class="fb-card-desc">Gỡ bỏ tình trạng đình chỉ tài khoản, khôi phục đầy đủ chức năng. Cam kết hoàn tiền nếu thất bại.</div>
+      <div class="fb-card-tag">🔥 Phổ biến</div>
+    </div>
+
+    <!-- 11 – từ bộ cũ -->
+    <div class="fb-card">
+      <div class="fb-card-icon">🤖</div>
+      <div class="fb-card-title">Tăng Tương Tác (Bot &amp; Người Thật)</div>
+      <div class="fb-card-desc">Like, comment, share, follow tự động hoặc từ người thật. Tăng độ phủ sóng bài viết &amp; fanpage.</div>
+      <div class="fb-card-tag">📈 Tăng reach</div>
     </div>
 
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- ══════════ GẠN THẺ CÀO ══════════ -->
-<section id="gachu">
-  <p class="section-label">Dịch Vụ Tài Chính</p>
-  <h2 class="section-title">GẠN THẺ CÀO<br>& TIỀN MẶT</h2>
-  <div class="grid-3">
-
-    <div class="card special">
-      <div class="card-icon">💳</div>
-      <div class="card-name">
-        Gạch Thẻ Cào – Chỉ Mất 5% Giá Trị
-        <span class="badge-hot">HOT</span>
+<!-- TÀI CHÍNH -->
+<section id="finance">
+  <div class="section-label">Dịch Vụ Tài Chính</div>
+  <h2 class="section-title">GẠN THẺ CÀO &amp; TIỀN MẶT <span class="finance-badge">HOT</span></h2>
+  <p class="section-sub">Đổi thẻ cào sang tiền mặt cực nhanh — phí chỉ 5%, thấp nhất thị trường. Hỗ trợ 24/7.</p>
+  <div class="finance-card">
+    <p style="font-size:.88rem;color:var(--muted);">Hỗ trợ: Viettel · Vinaphone · Mobifone · Vietnamobile · Zing · Gate · Garena · Vcoin · Appota · Scoin</p>
+    <div class="finance-grid">
+      <div class="price-row">
+        <div class="amount">10.000đ</div>
+        <div class="arrow">→ Tiền mặt</div>
+        <div class="receive">Nhận 9.500đ</div>
+        <div class="fee">Phí 500đ (5%)</div>
       </div>
-      <div class="card-desc">
-        Đổi thẻ cào sang tiền mặt hoặc ngược lại. Hỗ trợ đủ mệnh giá, đủ loại thẻ (Viettel, Vinaphone, Mobifone, Vietnamobile, Zing, Gate, Garena, Vcoin, Appota, Scoin). Giao dịch nhanh, nhận tiền ngay. Phí chỉ 5% — thấp nhất thị trường.
+      <div class="price-row">
+        <div class="amount">20.000đ</div>
+        <div class="arrow">→ Tiền mặt</div>
+        <div class="receive">Nhận 19.000đ</div>
+        <div class="fee">Phí 1.000đ (5%)</div>
       </div>
-
-      <div class="gachu-grid">
-        <div class="gachu-item">
-          <span class="label">Thẻ 10.000đ</span>
-          <span class="original">→ Tiền mặt</span>
-          <span class="received">Nhận: 9.500đ</span>
-          <span class="fee">Phí: 500đ (5%)</span>
-        </div>
-        <div class="gachu-item">
-          <span class="label">Thẻ 20.000đ</span>
-          <span class="original">→ Tiền mặt</span>
-          <span class="received">Nhận: 19.000đ</span>
-          <span class="fee">Phí: 1.000đ (5%)</span>
-        </div>
-        <div class="gachu-item">
-          <span class="label">Thẻ 50.000đ</span>
-          <span class="original">→ Tiền mặt</span>
-          <span class="received">Nhận: 47.500đ</span>
-          <span class="fee">Phí: 2.500đ (5%)</span>
-        </div>
-        <div class="gachu-item">
-          <span class="label">Thẻ 100.000đ</span>
-          <span class="original">→ Tiền mặt</span>
-          <span class="received">Nhận: 95.000đ</span>
-          <span class="fee">Phí: 5.000đ (5%)</span>
-        </div>
-        <div class="gachu-item">
-          <span class="label">Thẻ 200.000đ</span>
-          <span class="original">→ Tiền mặt</span>
-          <span class="received">Nhận: 190.000đ</span>
-          <span class="fee">Phí: 10.000đ (5%)</span>
-        </div>
-        <div class="gachu-item">
-          <span class="label">Thẻ 500.000đ</span>
-          <span class="original">→ Tiền mặt</span>
-          <span class="received">Nhận: 475.000đ</span>
-          <span class="fee">Phí: 25.000đ (5%)</span>
-        </div>
+      <div class="price-row">
+        <div class="amount">50.000đ</div>
+        <div class="arrow">→ Tiền mặt</div>
+        <div class="receive">Nhận 47.500đ</div>
+        <div class="fee">Phí 2.500đ (5%)</div>
       </div>
-
-      <p style="margin-top:20px; color:var(--muted); font-size:.85rem;">
-        ✅ Đủ mạng — ✅ Đủ mệnh giá — ✅ Nhận tiền ngay — ✅ Hỗ trợ 24/7
-      </p>
+      <div class="price-row">
+        <div class="amount">100.000đ</div>
+        <div class="arrow">→ Tiền mặt</div>
+        <div class="receive">Nhận 95.000đ</div>
+        <div class="fee">Phí 5.000đ (5%)</div>
+      </div>
+      <div class="price-row">
+        <div class="amount">200.000đ</div>
+        <div class="arrow">→ Tiền mặt</div>
+        <div class="receive">Nhận 190.000đ</div>
+        <div class="fee">Phí 10.000đ (5%)</div>
+      </div>
+      <div class="price-row">
+        <div class="amount">500.000đ</div>
+        <div class="arrow">→ Tiền mặt</div>
+        <div class="receive">Nhận 475.000đ</div>
+        <div class="fee">Phí 25.000đ (5%)</div>
+      </div>
     </div>
-
+    <div class="finance-note">
+      <div class="note-chip">✅ Đủ mạng</div>
+      <div class="note-chip">✅ Đủ mệnh giá</div>
+      <div class="note-chip">✅ Nhận tiền ngay</div>
+      <div class="note-chip">✅ Hỗ trợ 24/7</div>
+    </div>
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- ══════════ PREMIUM APPS ══════════ -->
+<!-- APP PREMIUM -->
 <section id="apps">
-  <p class="section-label">Ứng Dụng</p>
-  <h2 class="section-title">APP PREMIUM<br>GIÁ RẺ</h2>
-  <div class="grid-3">
-
-    <div class="card">
-      <div class="card-icon">🎵</div>
-      <div class="card-name">Spotify Premium</div>
-      <div class="card-desc">Nghe nhạc không quảng cáo, tải về offline, chất lượng cao.</div>
-      <span class="price-tag">Từ 25.000đ / tháng</span>
+  <div class="section-label">Ứng Dụng</div>
+  <h2 class="section-title">APP PREMIUM GIÁ RẺ</h2>
+  <p class="section-sub">Tài khoản premium chính hãng, giá siêu rẻ. Cập nhật đều đặn.</p>
+  <div class="app-grid">
+    <div class="app-card">
+      <span class="emoji">🎵</span>
+      <h4>Spotify Premium</h4>
+      <p>Nghe nhạc không quảng cáo, tải về offline, chất lượng cao.</p>
+      <div class="app-price">Từ 25.000đ / tháng</div>
     </div>
-
-    <div class="card">
-      <div class="card-icon">🎬</div>
-      <div class="card-name">Netflix / YouTube Premium</div>
-      <div class="card-desc">Tài khoản chính chủ hoặc chia sẻ, xem 4K, không quảng cáo.</div>
-      <span class="price-tag">Từ 30.000đ / tháng</span>
+    <div class="app-card">
+      <span class="emoji">🎬</span>
+      <h4>Netflix / YouTube Premium</h4>
+      <p>Tài khoản chính chủ hoặc chia sẻ, xem 4K, không quảng cáo.</p>
+      <div class="app-price">Từ 30.000đ / tháng</div>
     </div>
-
-    <div class="card">
-      <div class="card-icon">🤖</div>
-      <div class="card-name">ChatGPT Plus / Claude Pro</div>
-      <div class="card-desc">Truy cập GPT-4, Claude 3 Opus, không giới hạn tin nhắn.</div>
-      <span class="price-tag">Từ 50.000đ / tháng</span>
+    <div class="app-card">
+      <span class="emoji">🤖</span>
+      <h4>ChatGPT Plus / Claude Pro</h4>
+      <p>Truy cập GPT-4, Claude Opus, không giới hạn tin nhắn.</p>
+      <div class="app-price">Từ 50.000đ / tháng</div>
     </div>
-
-    <div class="card">
-      <div class="card-icon">🎨</div>
-      <div class="card-name">Canva Pro / Adobe CC</div>
-      <div class="card-desc">Đầy đủ tính năng thiết kế chuyên nghiệp, kho asset khổng lồ.</div>
-      <span class="price-tag">Từ 80.000đ / tháng</span>
+    <div class="app-card">
+      <span class="emoji">🎨</span>
+      <h4>Canva Pro / Adobe CC</h4>
+      <p>Đầy đủ tính năng thiết kế chuyên nghiệp, kho asset khổng lồ.</p>
+      <div class="app-price">Từ 80.000đ / tháng</div>
     </div>
-
-    <div class="card">
-      <div class="card-icon">📦</div>
-      <div class="card-name">Các App Khác</div>
-      <div class="card-desc">Microsoft 365, Duolingo, Grammarly, VPN, Notion... và nhiều app khác theo yêu cầu.</div>
-      <span class="price-tag red">Liên hệ báo giá</span>
+    <div class="app-card">
+      <span class="emoji">📦</span>
+      <h4>Các App Khác</h4>
+      <p>Microsoft 365, Duolingo, Grammarly, VPN, Notion... và nhiều app khác theo yêu cầu.</p>
+      <div class="app-price">Liên hệ báo giá</div>
     </div>
-
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- ══════════ COURSES ══════════ -->
+<!-- COURSES -->
 <section id="courses">
-  <p class="section-label">Khóa Học</p>
-  <h2 class="section-title">HỌC & KIẾM<br>TIỀN ONLINE</h2>
-  <div style="display:flex; flex-direction:column; gap:14px;">
-
+  <div class="section-label">Khóa Học</div>
+  <h2 class="section-title">HỌC &amp; KIẾM TIỀN ONLINE</h2>
+  <p class="section-sub">Khóa học thực chiến, học xong làm được ngay. Có mentor hỗ trợ 1-1.</p>
+  <div class="course-grid">
     <div class="course-card">
       <div class="course-num">01</div>
-      <div class="course-info">
-        <div class="course-name">Khóa Học Dịch Vụ Facebook</div>
-        <div class="course-desc">Toàn bộ nghề dịch vụ Facebook từ A–Z: tăng tương tác, dame, bảo vệ, mở khoá. Học xong tự làm được ngay.</div>
-        <span class="price-tag">300.000đ</span>
-      </div>
+      <h4>Khóa Học Dịch Vụ Facebook</h4>
+      <p>Toàn bộ nghề dịch vụ Facebook từ A–Z: tăng tương tác, bảo vệ, mở khoá. Học xong tự làm được ngay.</p>
+      <div class="course-price">300.000đ</div>
     </div>
-
     <div class="course-card">
       <div class="course-num">02</div>
-      <div class="course-info">
-        <div class="course-name">Khóa Học AI Kiếm Tiền</div>
-        <div class="course-desc">Sử dụng ChatGPT, Midjourney, Claude, Gemini... để tạo nội dung, freelance và xây dựng thu nhập thụ động.</div>
-        <span class="price-tag">700.000đ</span>
-      </div>
+      <h4>Khóa Học AI Kiếm Tiền</h4>
+      <p>Sử dụng ChatGPT, Midjourney, Claude, Gemini... để tạo nội dung, freelance và xây dựng thu nhập thụ động.</p>
+      <div class="course-price">700.000đ</div>
     </div>
-
     <div class="course-card">
       <div class="course-num">03</div>
-      <div class="course-info">
-        <div class="course-name">Khóa Học Lập Trình Đa Ngôn Ngữ</div>
-        <div class="course-desc">Python, JavaScript, PHP, C++... từ cơ bản đến ứng dụng thực tế. Có mentor hỗ trợ 1-1.</div>
-        <span class="price-tag">999.000đ</span>
-      </div>
+      <h4>Khóa Học Lập Trình Đa Ngôn Ngữ</h4>
+      <p>Python, JavaScript, PHP, C++... từ cơ bản đến ứng dụng thực tế. Có mentor hỗ trợ 1-1.</p>
+      <div class="course-price">999.000đ</div>
     </div>
-
     <div class="course-card">
       <div class="course-num">04</div>
-      <div class="course-info">
-        <div class="course-name">Khóa Học Trading ONUS Pro</div>
-        <div class="course-desc">Phân tích kỹ thuật, quản lý vốn, chiến lược giao dịch crypto trên sàn ONUS. Từ newbie đến trader chuyên nghiệp.</div>
-        <span class="price-tag">1.000.000đ</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ══════════ CUSTOM WORK ══════════ -->
-<section id="custom">
-  <p class="section-label">Làm Theo Yêu Cầu</p>
-  <h2 class="section-title">TOOL – BOT – WEB<br>& THƯƠNG HIỆU</h2>
-  <div class="grid-3">
-
-    <div class="card">
-      <div class="card-icon">⚙️</div>
-      <div class="card-name">Làm Tool – Bot – Web Theo Yêu Cầu</div>
-      <div class="card-desc">Automation bot, tool Facebook, web bán hàng, landing page, hệ thống quản lý... Làm theo spec, bàn giao source code.</div>
-      <span class="price-tag red">Báo giá theo dự án</span>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">📰</div>
-      <div class="card-name">Viết Báo Online – Xây Dựng Tên Tuổi</div>
-      <div class="card-desc">Đăng bài PR thương hiệu, cá nhân trên các báo lớn. Tăng uy tín, xây dựng hình ảnh chuyên gia.</div>
-      <span class="price-tag">Từ 50.000đ / bài</span>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">🎨</div>
-      <div class="card-name">Thiết Kế Logo & Thương Hiệu Cá Nhân</div>
-      <div class="card-desc">Logo độc quyền, bộ nhận diện thương hiệu, avatar, banner, name card. Cung cấp file vector full.</div>
-      <span class="price-tag">Từ 50.000đ</span>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══════════ CONTACT CTA ══════════ -->
-<section id="contact" style="padding-bottom: 40px;">
-  <div class="custom-box">
-    <div>
-      <h3>LIÊN HỆ NGAY 🚀</h3>
-      <p>Tất cả dịch vụ đều hỗ trợ 24/7. Nhắn tin để được báo giá chi tiết và tư vấn miễn phí.</p>
-    </div>
-    <div style="display:flex; flex-wrap:wrap; gap:12px;">
-      <a class="btn-gold" href="https://www.facebook.com/share/18CvUZSKJY/?mibextid=wwXIfr" target="_blank">💬 Nhắn Tin Facebook</a>
+      <h4>Khóa Học Trading ONUS Pro</h4>
+      <p>Phân tích kỹ thuật, quản lý vốn, chiến lược giao dịch crypto trên sàn ONUS. Từ newbie đến trader chuyên nghiệp.</p>
+      <div class="course-price">1.000.000đ</div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ FOOTER ══════════ -->
+<!-- TOOLS / CUSTOM -->
+<section id="tools">
+  <div class="section-label">Làm Theo Yêu Cầu</div>
+  <h2 class="section-title">TOOL – BOT – WEB &amp; THƯƠNG HIỆU</h2>
+  <p class="section-sub">Tất cả đều làm theo spec, bàn giao source code, bảo hành đầy đủ.</p>
+  <div class="tool-grid">
+    <div class="tool-card">
+      <div class="icon">⚙️</div>
+      <h4>Làm Tool – Bot – Web Theo Yêu Cầu</h4>
+      <p>Automation bot, tool Facebook, web bán hàng, landing page, hệ thống quản lý... Làm theo spec, bàn giao source code.</p>
+      <div class="tool-price">Báo giá theo dự án</div>
+    </div>
+    <div class="tool-card">
+      <div class="icon">📰</div>
+      <h4>Viết Báo Online – Xây Dựng Tên Tuổi</h4>
+      <p>Đăng bài PR thương hiệu, cá nhân trên các báo lớn. Tăng uy tín, xây dựng hình ảnh chuyên gia.</p>
+      <div class="tool-price">Từ 50.000đ / bài</div>
+    </div>
+    <div class="tool-card">
+      <div class="icon">🎨</div>
+      <h4>Thiết Kế Logo &amp; Thương Hiệu Cá Nhân</h4>
+      <p>Logo độc quyền, bộ nhận diện thương hiệu, avatar, banner, name card. Cung cấp file vector full.</p>
+      <div class="tool-price">Từ 50.000đ</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box">
+    <h3>LIÊN HỆ NGAY 🚀</h3>
+    <p>Tất cả dịch vụ đều hỗ trợ 24/7. Nhắn tin để được báo giá chi tiết và tư vấn miễn phí.</p>
+    <a href="https://www.facebook.com/share/18CvUZSKJY/?mibextid=wwXIfr"
+       class="btn btn-primary" target="_blank" rel="noopener">
+      💬 Nhắn Tin Facebook
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="brand">HOÀNG MINH CHIẾN TRICKER</div>
-  <div class="tagline">Hoàng Đế trong giới Tricker – Hacker · Dịch vụ Digital uy tín &amp; chuyên nghiệp</div>
-  <p style="color:var(--muted); font-size:.75rem; margin-top:20px;">© 2026 Hoàng Minh Chiến Tricker.</p>
+  <p><span>HOÀNG MINH CHIẾN TRICKER</span> · Hoàng Đế trong giới Tricker – Hacker · Dịch vụ Digital uy tín &amp; chuyên nghiệp</p>
+  <p style="margin-top:8px;">© 2026 Hoàng Minh Chiến Tricker.</p>
 </footer>
 
 </body>
