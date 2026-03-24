@@ -3,27 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chiến Tricker – Dịch Vụ Facebook</title>
+  <meta name="description" content="Hoàng Minh Chiến Tricker – Dịch vụ Facebook, App Premium, Khóa Học, Tool & Web uy tín số 1." />
+  <title>Chiến Tricker – Dịch Vụ Facebook Uy Tín</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --blue: #1877f2;
-      --blue-dark: #0d5fcc;
+      --blue:       #1877f2;
+      --blue-dark:  #0d5fcc;
       --blue-light: #4a9eff;
-      --gold: #f5a623;
+      --gold:       #f5a623;
       --gold-light: #ffd166;
-      --bg: #0a0e1a;
-      --bg2: #0f1525;
-      --bg3: #141b30;
-      --card: #161d33;
-      --card2: #1c2540;
-      --border: rgba(24,119,242,0.18);
-      --text: #e8eaf6;
-      --muted: #8892b0;
-      --radius: 14px;
+      --green:      #4ade80;
+      --red:        #e74c3c;
+      --bg:         #0a0e1a;
+      --bg2:        #0f1525;
+      --bg3:        #141b30;
+      --card:       #161d33;
+      --card2:      #1c2540;
+      --border:     rgba(24,119,242,.18);
+      --border-h:   rgba(24,119,242,.45);
+      --text:       #e8eaf6;
+      --muted:      #8892b0;
+      --radius:     14px;
+      --shadow-blue: 0 12px 40px rgba(24,119,242,.22);
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -35,33 +41,73 @@
     }
 
     /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 5%;
       height: 64px;
-      background: rgba(10,14,26,0.85);
-      backdrop-filter: blur(16px);
+      background: rgba(10,14,26,.92);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
     }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.5); }
     .nav-logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1rem; font-weight: 900;
+      font-size: .95rem; font-weight: 900;
       color: var(--blue-light);
       letter-spacing: 1px;
+      white-space: nowrap;
     }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links { display: flex; gap: 26px; list-style: none; }
     .nav-links a {
       color: var(--muted); text-decoration: none;
-      font-size: .88rem; font-weight: 500;
+      font-size: .86rem; font-weight: 500;
       transition: color .2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--blue-light);
+      transform: scaleX(0); transition: transform .25s;
     }
     .nav-links a:hover { color: var(--blue-light); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; cursor: pointer; padding: 6px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(10,14,26,.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 5% 28px; z-index: 199;
+      flex-direction: column; gap: 6px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text); text-decoration: none;
+      font-size: 1rem; font-weight: 600;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
 
     /* ── HERO ── */
     .hero {
@@ -69,198 +115,234 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
-      padding: 100px 5% 60px;
+      padding: 120px 5% 70px;
       background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(24,119,242,.25), transparent),
-        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(245,166,35,.08), transparent),
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(24,119,242,.28), transparent),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(245,166,35,.1), transparent),
+        radial-gradient(ellipse 30% 40% at 10% 60%, rgba(24,119,242,.07), transparent),
         var(--bg);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(24,119,242,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(24,119,242,.04) 1px, transparent 1px);
+        linear-gradient(rgba(24,119,242,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,119,242,.05) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(24,119,242,.12);
-      border: 1px solid rgba(24,119,242,.35);
+      border: 1px solid rgba(24,119,242,.38);
       color: var(--blue-light);
-      font-size: .8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      padding: 6px 18px; border-radius: 50px;
+      font-size: .78rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 7px 20px; border-radius: 50px;
       margin-bottom: 28px;
       animation: fadeUp .6s ease both;
     }
+    .pulse-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(74,222,128,.4);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%  { box-shadow: 0 0 0 0 rgba(74,222,128,.5); }
+      70% { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+    }
     .hero h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2rem, 6vw, 4.2rem);
-      font-weight: 900;
-      line-height: 1.1;
+      font-size: clamp(1.9rem, 6vw, 4rem);
+      font-weight: 900; line-height: 1.1;
       background: linear-gradient(135deg, #fff 0%, var(--blue-light) 50%, var(--gold) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 20px;
       animation: fadeUp .7s .1s ease both;
     }
-    .hero p {
-      font-size: clamp(.95rem, 2vw, 1.15rem);
-      color: var(--muted); max-width: 600px;
+    .hero-sub {
+      font-size: clamp(.92rem, 2vw, 1.12rem);
+      color: var(--muted); max-width: 580px;
       animation: fadeUp .7s .2s ease both;
       margin-bottom: 40px;
     }
     .hero-btns {
       display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
       animation: fadeUp .7s .3s ease both;
+      margin-bottom: 56px;
     }
+
+    /* Stats */
+    .hero-stats {
+      display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp .7s .45s ease both;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem; font-weight: 900;
+      color: var(--blue-light);
+      line-height: 1;
+    }
+    .stat-label { font-size: .75rem; color: var(--muted); margin-top: 4px; letter-spacing: 1px; }
+    .stat-sep { width: 1px; background: var(--border); }
+
+    /* ── BTN ── */
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 13px 28px; border-radius: 50px;
-      font-size: .92rem; font-weight: 700; text-decoration: none;
-      transition: transform .2s, box-shadow .2s;
-      cursor: pointer; border: none;
+      font-size: .9rem; font-weight: 700; text-decoration: none;
+      transition: transform .2s, box-shadow .2s, background .2s;
+      cursor: pointer; border: none; font-family: inherit;
     }
-    .btn:hover { transform: translateY(-2px); }
+    .btn:hover { transform: translateY(-3px); }
     .btn-primary {
       background: linear-gradient(135deg, var(--blue), var(--blue-dark));
       color: #fff;
-      box-shadow: 0 4px 24px rgba(24,119,242,.4);
+      box-shadow: 0 4px 24px rgba(24,119,242,.45);
     }
-    .btn-primary:hover { box-shadow: 0 8px 32px rgba(24,119,242,.55); }
+    .btn-primary:hover { box-shadow: 0 10px 36px rgba(24,119,242,.6); }
     .btn-outline {
       background: transparent;
-      border: 1.5px solid var(--blue);
+      border: 1.5px solid rgba(24,119,242,.5);
       color: var(--blue-light);
     }
-    .btn-outline:hover { background: rgba(24,119,242,.1); }
+    .btn-outline:hover { background: rgba(24,119,242,.1); border-color: var(--blue); }
+    .btn-sm {
+      padding: 8px 18px; font-size: .8rem;
+      margin-top: auto;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), #e08c00);
+      color: #000; font-weight: 800;
+      box-shadow: 0 4px 20px rgba(245,166,35,.35);
+    }
+    .btn-gold:hover { box-shadow: 0 8px 30px rgba(245,166,35,.5); }
 
-    /* ── SECTION COMMON ── */
+    /* ── SECTION ── */
     section { padding: 90px 5%; }
     .section-label {
       display: inline-block;
-      font-size: .75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--blue-light);
-      margin-bottom: 12px;
+      font-size: .72rem; font-weight: 800; letter-spacing: 3.5px; text-transform: uppercase;
+      color: var(--blue-light); margin-bottom: 10px;
     }
     .section-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-      font-weight: 900;
-      margin-bottom: 10px;
+      font-size: clamp(1.3rem, 3.5vw, 2rem);
+      font-weight: 900; margin-bottom: 10px;
     }
-    .section-sub { color: var(--muted); font-size: .95rem; margin-bottom: 50px; }
+    .section-sub { color: var(--muted); font-size: .92rem; margin-bottom: 44px; max-width: 620px; }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── FACEBOOK SERVICES ── */
     #services { background: var(--bg2); }
-    .fb-header {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 8px;
-    }
+    .fb-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
     .fb-icon-big {
-      width: 48px; height: 48px; border-radius: 12px;
+      width: 46px; height: 46px; border-radius: 11px;
       background: linear-gradient(135deg, var(--blue), var(--blue-dark));
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.5rem; flex-shrink: 0;
     }
     .service-count {
       display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(24,119,242,.12); border: 1px solid rgba(24,119,242,.25);
-      color: var(--blue-light); font-size: .78rem; font-weight: 700;
-      padding: 4px 12px; border-radius: 50px; letter-spacing: 1px;
-      margin-bottom: 36px;
+      background: rgba(24,119,242,.1); border: 1px solid rgba(24,119,242,.25);
+      color: var(--blue-light); font-size: .76rem; font-weight: 800;
+      padding: 5px 14px; border-radius: 50px; letter-spacing: 1px;
+      margin-bottom: 32px;
     }
-
-    /* Grid cho 10 dịch vụ */
     .fb-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
     }
     .fb-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px 22px;
-      display: flex; flex-direction: column; gap: 10px;
+      padding: 22px 20px 20px;
+      display: flex; flex-direction: column; gap: 9px;
       transition: transform .25s, border-color .25s, box-shadow .25s;
       position: relative; overflow: hidden;
     }
     .fb-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, var(--blue), var(--blue-light));
-      opacity: 0;
-      transition: opacity .25s;
+      opacity: 0; transition: opacity .25s;
     }
     .fb-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(24,119,242,.45);
-      box-shadow: 0 12px 40px rgba(24,119,242,.18);
+      transform: translateY(-5px);
+      border-color: var(--border-h);
+      box-shadow: var(--shadow-blue);
     }
     .fb-card:hover::before { opacity: 1; }
-
     .fb-card-icon {
-      font-size: 1.8rem;
-      width: 48px; height: 48px;
-      background: rgba(24,119,242,.1);
-      border-radius: 10px;
+      font-size: 1.7rem; width: 46px; height: 46px;
+      background: rgba(24,119,242,.1); border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
     }
-    .fb-card-title {
-      font-size: .95rem; font-weight: 800;
-      color: #fff; line-height: 1.3;
-    }
-    .fb-card-desc {
-      font-size: .83rem; color: var(--muted); line-height: 1.5;
-    }
+    .fb-card-title { font-size: .93rem; font-weight: 800; color: #fff; line-height: 1.3; }
+    .fb-card-desc { font-size: .81rem; color: var(--muted); line-height: 1.55; flex: 1; }
+    .fb-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; gap: 8px; flex-wrap: wrap; }
     .fb-card-tag {
       display: inline-flex; align-items: center;
-      background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.25);
-      color: var(--gold-light); font-size: .72rem; font-weight: 700;
+      background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.22);
+      color: var(--gold-light); font-size: .7rem; font-weight: 700;
       padding: 3px 10px; border-radius: 50px;
-      width: fit-content; margin-top: 4px;
     }
 
-    /* ── TÀI CHÍNH ── */
+    /* ── FINANCE ── */
     #finance { background: var(--bg3); }
+    .finance-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: #fff; font-size: .68rem; font-weight: 800; letter-spacing: 1.5px;
+      padding: 3px 10px; border-radius: 50px; text-transform: uppercase;
+      margin-left: 10px; vertical-align: middle;
+    }
     .finance-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 32px;
+      padding: 28px;
     }
-    .finance-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: linear-gradient(135deg, #e74c3c, #c0392b);
-      color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: 1.5px;
-      padding: 4px 12px; border-radius: 50px; text-transform: uppercase;
-      margin-left: 10px; vertical-align: middle;
+    .provider-row {
+      font-size: .84rem; color: var(--muted);
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
     }
+    .provider-row strong { color: var(--text); }
     .finance-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px; margin-top: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 11px;
     }
     .price-row {
       background: var(--card2);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 16px; text-align: center;
+      padding: 16px 12px; text-align: center;
+      transition: border-color .2s, transform .2s;
     }
-    .price-row .amount { font-size: 1rem; font-weight: 800; color: var(--gold-light); }
-    .price-row .arrow { color: var(--muted); font-size: .8rem; margin: 4px 0; }
-    .price-row .receive { font-size: .88rem; font-weight: 700; color: #4ade80; }
-    .price-row .fee { font-size: .75rem; color: var(--muted); }
-    .finance-note {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;
-    }
+    .price-row:hover { border-color: var(--border-h); transform: translateY(-2px); }
+    .price-row .amount { font-size: .97rem; font-weight: 800; color: var(--gold-light); }
+    .price-row .arrow { color: var(--muted); font-size: .76rem; margin: 4px 0; }
+    .price-row .receive { font-size: .86rem; font-weight: 800; color: var(--green); }
+    .price-row .fee { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+    .finance-note { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
     .note-chip {
       display: flex; align-items: center; gap: 6px;
-      background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.2);
-      color: #4ade80; font-size: .78rem; font-weight: 600;
+      background: rgba(74,222,128,.07); border: 1px solid rgba(74,222,128,.2);
+      color: var(--green); font-size: .76rem; font-weight: 700;
       padding: 5px 12px; border-radius: 50px;
     }
 
@@ -268,76 +350,94 @@
     #apps { background: var(--bg2); }
     .app-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
     }
     .app-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 26px 20px;
+      padding: 26px 20px 20px;
       text-align: center;
-      transition: transform .25s, border-color .25s;
+      display: flex; flex-direction: column;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
     }
-    .app-card:hover { transform: translateY(-4px); border-color: rgba(24,119,242,.4); }
+    .app-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-h);
+      box-shadow: var(--shadow-blue);
+    }
     .app-card .emoji { font-size: 2.2rem; margin-bottom: 12px; display: block; }
-    .app-card h4 { font-size: .92rem; font-weight: 800; margin-bottom: 8px; }
-    .app-card p { font-size: .8rem; color: var(--muted); margin-bottom: 14px; }
+    .app-card h4 { font-size: .9rem; font-weight: 800; margin-bottom: 8px; }
+    .app-card p { font-size: .79rem; color: var(--muted); margin-bottom: 14px; flex: 1; }
     .app-price {
-      font-size: .82rem; font-weight: 700; color: var(--blue-light);
+      font-size: .8rem; font-weight: 700; color: var(--blue-light);
       background: rgba(24,119,242,.1); border-radius: 50px;
-      padding: 4px 12px; display: inline-block;
+      padding: 4px 12px; display: inline-block; margin-bottom: 10px;
     }
 
     /* ── COURSES ── */
     #courses { background: var(--bg3); }
     .course-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 18px;
     }
     .course-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px 24px;
-      display: flex; flex-direction: column; gap: 12px;
-      transition: transform .25s, border-color .25s;
+      padding: 26px 22px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
     }
-    .course-card:hover { transform: translateY(-4px); border-color: rgba(245,166,35,.4); }
+    .course-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      opacity: 0; transition: opacity .25s;
+    }
+    .course-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(245,166,35,.35);
+      box-shadow: 0 12px 40px rgba(245,166,35,.12);
+    }
+    .course-card:hover::after { opacity: 1; }
     .course-num {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.2rem; font-weight: 900;
-      color: rgba(24,119,242,.2);
-      line-height: 1;
+      font-size: 2rem; font-weight: 900;
+      color: rgba(24,119,242,.18); line-height: 1;
     }
-    .course-card h4 { font-size: .97rem; font-weight: 800; }
-    .course-card p { font-size: .83rem; color: var(--muted); flex: 1; }
-    .course-price {
-      font-size: .92rem; font-weight: 800;
-      color: var(--gold-light);
-    }
+    .course-card h4 { font-size: .95rem; font-weight: 800; }
+    .course-card p { font-size: .81rem; color: var(--muted); flex: 1; }
+    .course-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; }
+    .course-price { font-size: .92rem; font-weight: 800; color: var(--gold-light); }
 
-    /* ── TOOLS / CUSTOM ── */
+    /* ── TOOLS ── */
     #tools { background: var(--bg2); }
     .tool-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
     }
     .tool-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px 24px;
-      display: flex; flex-direction: column; gap: 12px;
-      transition: transform .25s, border-color .25s;
+      padding: 26px 22px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
     }
-    .tool-card:hover { transform: translateY(-4px); border-color: rgba(24,119,242,.4); }
-    .tool-card .icon { font-size: 2rem; }
-    .tool-card h4 { font-size: .97rem; font-weight: 800; }
-    .tool-card p { font-size: .83rem; color: var(--muted); flex: 1; }
-    .tool-price { font-size: .83rem; font-weight: 700; color: var(--blue-light); }
+    .tool-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-h);
+      box-shadow: var(--shadow-blue);
+    }
+    .tool-icon { font-size: 1.9rem; }
+    .tool-card h4 { font-size: .95rem; font-weight: 800; }
+    .tool-card p { font-size: .81rem; color: var(--muted); flex: 1; }
+    .tool-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; }
+    .tool-price { font-size: .8rem; font-weight: 700; color: var(--blue-light); }
 
     /* ── CONTACT ── */
     #contact {
@@ -347,87 +447,70 @@
       text-align: center;
     }
     .contact-box {
-      max-width: 540px; margin: 0 auto;
+      max-width: 520px; margin: 0 auto;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 48px 36px;
     }
+    .contact-box .section-label { display: block; }
     .contact-box h3 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.5rem; font-weight: 900;
+      font-size: 1.4rem; font-weight: 900;
       margin-bottom: 12px;
     }
-    .contact-box p { color: var(--muted); font-size: .9rem; margin-bottom: 28px; }
+    .contact-box p { color: var(--muted); font-size: .88rem; margin-bottom: 28px; }
+
+    /* ── BACK TO TOP ── */
+    #btt {
+      position: fixed; bottom: 24px; right: 24px; z-index: 300;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--blue); color: #fff;
+      border: none; cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(24,119,242,.5);
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s, transform .2s;
+    }
+    #btt.show { opacity: 1; pointer-events: auto; }
+    #btt:hover { transform: translateY(-3px); }
 
     /* ── FOOTER ── */
     footer {
       background: var(--bg);
       border-top: 1px solid var(--border);
-      padding: 30px 5%;
+      padding: 28px 5%;
       text-align: center;
-      color: var(--muted); font-size: .82rem;
+      color: var(--muted); font-size: .8rem;
     }
-    footer span { color: var(--blue-light); font-weight: 700; }
+    footer .footer-brand { color: var(--blue-light); font-weight: 800; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      nav { padding: 0 4%; }
+    @media (max-width: 768px) {
       .nav-links { display: none; }
-      section { padding: 60px 4%; }
-      .hero { padding: 90px 4% 50px; }
-      .hero h1 { font-size: 1.9rem; }
+      .hamburger { display: flex; }
+      section { padding: 70px 4%; }
+      .hero { padding: 100px 4% 60px; }
+      .hero-stats { gap: 24px; }
+      .stat-sep { display: none; }
+      .contact-box { padding: 36px 24px; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.7rem; }
+      .finance-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
-    <meta charset="UTF-8">
-    <title>Thông báo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: #e5e7eb;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .box {
-            max-width: 600px;
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-        h1 {
-            text-align: center;
-            color: #38bdf8;
-        }
-        p {
-            line-height: 1.6;
-            margin: 10px 0;
-        }
-        .contact {
-            margin-top: 20px;
-            padding: 15px;
-            background: #0f172a;
-            border-radius: 8px;
-        }
-        .contact strong {
-            color: #38bdf8;
-        }
-    </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="navbar">
   <div class="nav-logo">⚡ HMC TRICKER</div>
   <ul class="nav-links">
     <li><a href="#services">Facebook</a></li>
@@ -437,117 +520,176 @@
     <li><a href="#tools">Tool & Web</a></li>
     <li><a href="#contact">Liên Hệ</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">📘 Facebook</a>
+  <a href="#finance" onclick="closeMenu()">💳 Gạch Thẻ</a>
+  <a href="#apps" onclick="closeMenu()">📱 App Premium</a>
+  <a href="#courses" onclick="closeMenu()">🎓 Khóa Học</a>
+  <a href="#tools" onclick="closeMenu()">⚙️ Tool & Web</a>
+  <a href="#contact" onclick="closeMenu()">💬 Liên Hệ</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">⚡ Dịch Vụ Facebook Uy Tín Số 1</div>
+  <div class="hero-badge">
+    <span class="pulse-dot"></span>
+    Dịch Vụ Facebook Uy Tín Số 1
+  </div>
   <h1>HOÀNG MINH CHIẾN TRICKER</h1>
-  <p>Hoàng Đế trong giới Tricker – Hacker | Giải pháp toàn diện về Facebook, AI, Lập trình &amp; Tài chính số</p>
+  <p class="hero-sub">Hoàng Đế trong giới Tricker – Hacker | Giải pháp toàn diện về Facebook, AI, Lập trình &amp; Tài chính số</p>
   <div class="hero-btns">
     <a href="#services" class="btn btn-primary">🔥 Xem Dịch Vụ</a>
     <a href="#contact" class="btn btn-outline">💬 Liên Hệ Ngay</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Khách Hàng</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item">
+      <div class="stat-num">95%</div>
+      <div class="stat-label">Tỷ Lệ Thành Công</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Hỗ Trợ</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item">
+      <div class="stat-num">11</div>
+      <div class="stat-label">Dịch Vụ</div>
+    </div>
   </div>
 </section>
 
 <!-- FACEBOOK SERVICES -->
 <section id="services">
-  <div class="section-label">Facebook &amp; Tài Khoản</div>
-  <div class="fb-header">
-    <div class="fb-icon-big"></div>
+  <div class="section-label reveal">Facebook &amp; Tài Khoản</div>
+  <div class="fb-header reveal">
+    <div class="fb-icon-big">📘</div>
     <h2 class="section-title">DỊCH VỤ FACEBOOK</h2>
   </div>
-  <p class="section-sub">Cung cấp đa dạng các gói dịch vụ chất lượng cao — uy tín, chuyên nghiệp, hoàn tiền nếu thất bại.</p>
-  <div class="service-count">📋 &nbsp;11 DỊCH VỤ ĐANG CÓ</div>
+  <p class="section-sub reveal">Cung cấp đa dạng các gói dịch vụ chất lượng cao — uy tín, chuyên nghiệp, hoàn tiền nếu thất bại.</p>
+  <div class="service-count reveal">📋 &nbsp;11 DỊCH VỤ ĐANG CÓ</div>
 
   <div class="fb-grid">
 
-    <!-- 1 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">🔑</div>
       <div class="fb-card-title">Lấy Lại Facebook Bị Hack</div>
       <div class="fb-card-desc">Khôi phục tài khoản Facebook bị chiếm đoạt, hack, mất quyền truy cập. Cam kết hoàn tiền nếu thất bại.</div>
-      <div class="fb-card-tag">🔥 Phổ biến</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">🔥 Phổ biến</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 2 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">🟣</div>
       <div class="fb-card-title">Mở Khoá FB Dạng 956 (Két Sắt Tím &amp; Ổ Khoá Tím)</div>
       <div class="fb-card-desc">Xử lý chuyên biệt các dạng khoá 956 — két sắt tím và ổ khoá tím. Tỷ lệ thành công cao.</div>
-      <div class="fb-card-tag">⚡ Chuyên sâu</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">⚡ Chuyên sâu</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 3 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">🛡️</div>
       <div class="fb-card-title">Verify Bảo Vệ Tài Khoản Facebook</div>
       <div class="fb-card-desc">Xác minh &amp; gia cố bảo mật tài khoản, chống hack, chống phishing, thiết lập 2FA chuẩn.</div>
-      <div class="fb-card-tag">✅ An toàn</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">✅ An toàn</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 4 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">👥</div>
       <div class="fb-card-title">Chọc Bạn Bè Facebook</div>
       <div class="fb-card-desc">Dịch vụ tương tác, kết bạn mở rộng mạng lưới bạn bè Facebook theo yêu cầu.</div>
-      <div class="fb-card-tag">💬 Tương tác</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">💬 Tương tác</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 5 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">🧹</div>
       <div class="fb-card-title">Lọc Bạn Bè Facebook</div>
       <div class="fb-card-desc">Tự động phát hiện và lọc bạn bè ảo, không tương tác, giúp tài khoản sạch và hiệu quả hơn.</div>
-      <div class="fb-card-tag">🤖 Tự động</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">🤖 Tự động</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 6 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">📚</div>
       <div class="fb-card-title">Tut &amp; Trick FB</div>
       <div class="fb-card-desc">Cung cấp tài liệu, hướng dẫn (tutorial) và các trick Facebook mới nhất, cập nhật liên tục.</div>
-      <div class="fb-card-tag">📖 Tài liệu</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">📖 Tài liệu</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 7 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">✔️</div>
       <div class="fb-card-title">Auto Lên Tick Xanh Facebook (New Profile)</div>
       <div class="fb-card-desc">Dịch vụ hỗ trợ xác minh tick xanh Facebook cho profile mới — nhanh, uy tín, chuyên nghiệp.</div>
-      <div class="fb-card-tag">💎 Premium</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">💎 Premium</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 8 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">🏅</div>
       <div class="fb-card-title">Auto Lên Tick Xanh Facebook (Chính Chủ)</div>
       <div class="fb-card-desc">Xác minh tick xanh cho tài khoản chính chủ, đủ điều kiện. Quy trình chuẩn, bảo mật thông tin.</div>
-      <div class="fb-card-tag">👑 Chính chủ</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">👑 Chính chủ</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 9 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">⚙️</div>
       <div class="fb-card-title">Auto Script Facebook</div>
       <div class="fb-card-desc">Cung cấp các script tự động hóa hoạt động Facebook: đăng bài, tương tác, quản lý tài khoản.</div>
-      <div class="fb-card-tag">🤖 Automation</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">🤖 Automation</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 10 -->
-    <div class="fb-card">
+    <div class="fb-card reveal">
       <div class="fb-card-icon">🔓</div>
       <div class="fb-card-title">Mở Khoá Đình Chỉ Facebook</div>
       <div class="fb-card-desc">Gỡ bỏ tình trạng đình chỉ tài khoản, khôi phục đầy đủ chức năng. Cam kết hoàn tiền nếu thất bại.</div>
-      <div class="fb-card-tag">🔥 Phổ biến</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">🔥 Phổ biến</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
-    <!-- 11 – từ bộ cũ -->
-    <div class="fb-card">
-      <div class="fb-card-icon">🤖</div>
+    <div class="fb-card reveal">
+      <div class="fb-card-icon">📈</div>
       <div class="fb-card-title">Tăng Tương Tác (Bot &amp; Người Thật)</div>
       <div class="fb-card-desc">Like, comment, share, follow tự động hoặc từ người thật. Tăng độ phủ sóng bài viết &amp; fanpage.</div>
-      <div class="fb-card-tag">📈 Tăng reach</div>
+      <div class="fb-card-footer">
+        <div class="fb-card-tag">📊 Tăng reach</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
 
   </div>
@@ -555,11 +697,13 @@
 
 <!-- TÀI CHÍNH -->
 <section id="finance">
-  <div class="section-label">Dịch Vụ Tài Chính</div>
-  <h2 class="section-title">GẠN THẺ CÀO &amp; TIỀN MẶT <span class="finance-badge">HOT</span></h2>
-  <p class="section-sub">Đổi thẻ cào sang tiền mặt cực nhanh — phí chỉ 5%, thấp nhất thị trường. Hỗ trợ 24/7.</p>
-  <div class="finance-card">
-    <p style="font-size:.88rem;color:var(--muted);">Hỗ trợ: Viettel · Vinaphone · Mobifone · Vietnamobile · Zing · Gate · Garena · Vcoin · Appota · Scoin</p>
+  <div class="section-label reveal">Dịch Vụ Tài Chính</div>
+  <h2 class="section-title reveal">GẠN THẺ CÀO &amp; TIỀN MẶT <span class="finance-badge">HOT</span></h2>
+  <p class="section-sub reveal">Đổi thẻ cào sang tiền mặt cực nhanh — phí chỉ 5%, thấp nhất thị trường. Hỗ trợ 24/7.</p>
+  <div class="finance-card reveal">
+    <div class="provider-row">
+      <strong>Hỗ trợ đầy đủ:</strong> Viettel · Vinaphone · Mobifone · Vietnamobile · Zing · Gate · Garena · Vcoin · Appota · Scoin
+    </div>
     <div class="finance-grid">
       <div class="price-row">
         <div class="amount">10.000đ</div>
@@ -609,118 +753,148 @@
 
 <!-- APP PREMIUM -->
 <section id="apps">
-  <div class="section-label">Ứng Dụng</div>
-  <h2 class="section-title">APP PREMIUM GIÁ RẺ</h2>
-  <p class="section-sub">Tài khoản premium chính hãng, giá siêu rẻ. Cập nhật đều đặn.</p>
+  <div class="section-label reveal">Ứng Dụng</div>
+  <h2 class="section-title reveal">APP PREMIUM GIÁ RẺ</h2>
+  <p class="section-sub reveal">Tài khoản premium chính hãng, giá siêu rẻ. Cập nhật đều đặn.</p>
   <div class="app-grid">
-    <div class="app-card">
+
+    <div class="app-card reveal">
       <span class="emoji">🎵</span>
       <h4>Spotify Premium</h4>
       <p>Nghe nhạc không quảng cáo, tải về offline, chất lượng cao.</p>
       <div class="app-price">Từ 25.000đ / tháng</div>
+      <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
     </div>
-    <div class="app-card">
+
+    <div class="app-card reveal">
       <span class="emoji">🎬</span>
       <h4>Netflix / YouTube Premium</h4>
       <p>Tài khoản chính chủ hoặc chia sẻ, xem 4K, không quảng cáo.</p>
       <div class="app-price">Từ 30.000đ / tháng</div>
-    <div class="box">
-        <h1>Thông báo</h1>
-        <p>Một hành trình đã khép lại, không phải vì thất bại mà vì tôi đã chọn một hướng đi khác.</p>
-        <p>Website hoangminhchien.xyz là cả một quãng thời gian đáng nhớ. Cảm ơn tất cả khách hàng đã tin tưởng và đồng hành.</p>
-        <p>Các đơn chưa được xử lý sẽ vẫn được hoàn thành đầy đủ.</p>
-
-        <div class="contact">
-            <p><strong>Liên hệ hỗ trợ:</strong></p>
-            <p>Email: hoangminhchientricker@gmail.com</p>
-            <p>Zalo: 0345161185</p>
-            <p>Vui lòng liên hệ để được hỗ trợ hoàn tất các đơn còn lại.</p>
-        </div>
+      <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
     </div>
-    <div class="app-card">
+
+    <div class="app-card reveal">
       <span class="emoji">🤖</span>
       <h4>ChatGPT Plus / Claude Pro</h4>
       <p>Truy cập GPT-4, Claude Opus, không giới hạn tin nhắn.</p>
       <div class="app-price">Từ 50.000đ / tháng</div>
+      <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
     </div>
-    <div class="app-card">
+
+    <div class="app-card reveal">
       <span class="emoji">🎨</span>
       <h4>Canva Pro / Adobe CC</h4>
       <p>Đầy đủ tính năng thiết kế chuyên nghiệp, kho asset khổng lồ.</p>
       <div class="app-price">Từ 80.000đ / tháng</div>
+      <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
     </div>
-    <div class="app-card">
+
+    <div class="app-card reveal">
       <span class="emoji">📦</span>
       <h4>Các App Khác</h4>
       <p>Microsoft 365, Duolingo, Grammarly, VPN, Notion... và nhiều app khác theo yêu cầu.</p>
       <div class="app-price">Liên hệ báo giá</div>
+      <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
     </div>
+
   </div>
 </section>
 
 <!-- COURSES -->
 <section id="courses">
-  <div class="section-label">Khóa Học</div>
-  <h2 class="section-title">HỌC &amp; KIẾM TIỀN ONLINE</h2>
-  <p class="section-sub">Khóa học thực chiến, học xong làm được ngay. Có mentor hỗ trợ 1-1.</p>
+  <div class="section-label reveal">Khóa Học</div>
+  <h2 class="section-title reveal">HỌC &amp; KIẾM TIỀN ONLINE</h2>
+  <p class="section-sub reveal">Khóa học thực chiến, học xong làm được ngay. Có mentor hỗ trợ 1-1.</p>
   <div class="course-grid">
-    <div class="course-card">
+
+    <div class="course-card reveal">
       <div class="course-num">01</div>
       <h4>Khóa Học Dịch Vụ Facebook</h4>
       <p>Toàn bộ nghề dịch vụ Facebook từ A–Z: tăng tương tác, bảo vệ, mở khoá. Học xong tự làm được ngay.</p>
-      <div class="course-price">300.000đ</div>
+      <div class="course-footer">
+        <div class="course-price">300.000đ</div>
+        <a href="#contact" class="btn btn-gold btn-sm">Đăng ký</a>
+      </div>
     </div>
-    <div class="course-card">
+
+    <div class="course-card reveal">
       <div class="course-num">02</div>
       <h4>Khóa Học AI Kiếm Tiền</h4>
       <p>Sử dụng ChatGPT, Midjourney, Claude, Gemini... để tạo nội dung, freelance và xây dựng thu nhập thụ động.</p>
-      <div class="course-price">700.000đ</div>
+      <div class="course-footer">
+        <div class="course-price">700.000đ</div>
+        <a href="#contact" class="btn btn-gold btn-sm">Đăng ký</a>
+      </div>
     </div>
-    <div class="course-card">
+
+    <div class="course-card reveal">
       <div class="course-num">03</div>
       <h4>Khóa Học Lập Trình Đa Ngôn Ngữ</h4>
       <p>Python, JavaScript, PHP, C++... từ cơ bản đến ứng dụng thực tế. Có mentor hỗ trợ 1-1.</p>
-      <div class="course-price">999.000đ</div>
+      <div class="course-footer">
+        <div class="course-price">999.000đ</div>
+        <a href="#contact" class="btn btn-gold btn-sm">Đăng ký</a>
+      </div>
     </div>
-    <div class="course-card">
+
+    <div class="course-card reveal">
       <div class="course-num">04</div>
       <h4>Khóa Học Trading ONUS Pro</h4>
       <p>Phân tích kỹ thuật, quản lý vốn, chiến lược giao dịch crypto trên sàn ONUS. Từ newbie đến trader chuyên nghiệp.</p>
-      <div class="course-price">1.000.000đ</div>
+      <div class="course-footer">
+        <div class="course-price">1.000.000đ</div>
+        <a href="#contact" class="btn btn-gold btn-sm">Đăng ký</a>
+      </div>
     </div>
+
   </div>
 </section>
 
 <!-- TOOLS / CUSTOM -->
 <section id="tools">
-  <div class="section-label">Làm Theo Yêu Cầu</div>
-  <h2 class="section-title">TOOL – BOT – WEB &amp; THƯƠNG HIỆU</h2>
-  <p class="section-sub">Tất cả đều làm theo spec, bàn giao source code, bảo hành đầy đủ.</p>
+  <div class="section-label reveal">Làm Theo Yêu Cầu</div>
+  <h2 class="section-title reveal">TOOL – BOT – WEB &amp; THƯƠNG HIỆU</h2>
+  <p class="section-sub reveal">Tất cả đều làm theo spec, bàn giao source code, bảo hành đầy đủ.</p>
   <div class="tool-grid">
-    <div class="tool-card">
-      <div class="icon">⚙️</div>
+
+    <div class="tool-card reveal">
+      <div class="tool-icon">⚙️</div>
       <h4>Làm Tool – Bot – Web Theo Yêu Cầu</h4>
       <p>Automation bot, tool Facebook, web bán hàng, landing page, hệ thống quản lý... Làm theo spec, bàn giao source code.</p>
-      <div class="tool-price">Báo giá theo dự án</div>
+      <div class="tool-footer">
+        <div class="tool-price">Báo giá theo dự án</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
-    <div class="tool-card">
-      <div class="icon">📰</div>
+
+    <div class="tool-card reveal">
+      <div class="tool-icon">📰</div>
       <h4>Viết Báo Online – Xây Dựng Tên Tuổi</h4>
       <p>Đăng bài PR thương hiệu, cá nhân trên các báo lớn. Tăng uy tín, xây dựng hình ảnh chuyên gia.</p>
-      <div class="tool-price">Từ 50.000đ / bài</div>
+      <div class="tool-footer">
+        <div class="tool-price">Từ 50.000đ / bài</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
-    <div class="tool-card">
-      <div class="icon">🎨</div>
+
+    <div class="tool-card reveal">
+      <div class="tool-icon">🎨</div>
       <h4>Thiết Kế Logo &amp; Thương Hiệu Cá Nhân</h4>
       <p>Logo độc quyền, bộ nhận diện thương hiệu, avatar, banner, name card. Cung cấp file vector full.</p>
-      <div class="tool-price">Từ 50.000đ</div>
+      <div class="tool-footer">
+        <div class="tool-price">Từ 50.000đ</div>
+        <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
+      </div>
     </div>
+
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-box">
+  <div class="contact-box reveal">
+    <div class="section-label">Liên Hệ</div>
     <h3>LIÊN HỆ NGAY 🚀</h3>
     <p>Tất cả dịch vụ đều hỗ trợ 24/7. Nhắn tin để được báo giá chi tiết và tư vấn miễn phí.</p>
     <a href="https://www.facebook.com/share/18CvUZSKJY/?mibextid=wwXIfr"
@@ -732,10 +906,59 @@
 
 <!-- FOOTER -->
 <footer>
-  <p><span>HOÀNG MINH CHIẾN TRICKER</span> · Hoàng Đế trong giới Tricker – Hacker · Dịch vụ Digital uy tín &amp; chuyên nghiệp</p>
-  <p style="margin-top:8px;">© 2026 Hoàng Minh Chiến Tricker.</p>
+  <p>
+    <span class="footer-brand">HOÀNG MINH CHIẾN TRICKER</span>
+    · Hoàng Đế trong giới Tricker – Hacker · Dịch vụ Digital uy tín &amp; chuyên nghiệp
+  </p>
+  <p style="margin-top:8px;">© 2026 Hoàng Minh Chiến Tricker. All rights reserved.</p>
 </footer>
 
+<!-- BACK TO TOP -->
+<button id="btt" aria-label="Lên đầu trang">↑</button>
+
+<script>
+  // ── Hamburger menu ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // ── Nav scroll shadow ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+    btt.classList.toggle('show', window.scrollY > 400);
+  }, { passive: true });
+
+  // ── Back to top ──
+  const btt = document.getElementById('btt');
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ── Scroll reveal ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger cards in a grid
+        const siblings = entry.target.closest('.fb-grid, .app-grid, .course-grid, .tool-grid, .finance-grid');
+        let delay = 0;
+        if (siblings) {
+          const cards = Array.from(siblings.querySelectorAll('.reveal'));
+          delay = cards.indexOf(entry.target) * 60;
+        }
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
 </body>
-</html>
 </html>
