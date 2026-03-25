@@ -367,7 +367,13 @@
       border-color: var(--border-h);
       box-shadow: var(--shadow-blue);
     }
-    .app-card .emoji { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+    .app-logo {
+      width: 64px; height: 64px; border-radius: 16px;
+      object-fit: contain; margin: 0 auto 14px;
+      display: block;
+      background: rgba(255,255,255,.05);
+      padding: 6px;
+    }
     .app-card h4 { font-size: .9rem; font-weight: 800; margin-bottom: 8px; }
     .app-card p { font-size: .79rem; color: var(--muted); margin-bottom: 14px; flex: 1; }
     .app-price {
@@ -759,7 +765,7 @@
   <div class="app-grid">
 
     <div class="app-card reveal">
-      <span class="emoji">🎵</span>
+      <img class="app-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png" alt="Spotify" loading="lazy">
       <h4>Spotify Premium</h4>
       <p>Nghe nhạc không quảng cáo, tải về offline, chất lượng cao.</p>
       <div class="app-price">Từ 25.000đ / tháng</div>
@@ -767,15 +773,15 @@
     </div>
 
     <div class="app-card reveal">
-      <span class="emoji">🎬</span>
-      <h4>Netflix / YouTube Premium</h4>
-      <p>Tài khoản chính chủ hoặc chia sẻ, xem 4K, không quảng cáo.</p>
+      <img class="app-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/159px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube" loading="lazy">
+      <h4>YouTube Premium</h4>
+      <p>Xem video không quảng cáo, tải offline, nghe nhạc nền, YouTube Music kèm theo.</p>
       <div class="app-price">Từ 30.000đ / tháng</div>
       <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
     </div>
 
     <div class="app-card reveal">
-      <span class="emoji">🤖</span>
+      <img class="app-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/180px-ChatGPT_logo.svg.png" alt="ChatGPT" loading="lazy">
       <h4>ChatGPT Plus / Claude Pro</h4>
       <p>Truy cập GPT-4, Claude Opus, không giới hạn tin nhắn.</p>
       <div class="app-price">Từ 50.000đ / tháng</div>
@@ -783,7 +789,7 @@
     </div>
 
     <div class="app-card reveal">
-      <span class="emoji">🎨</span>
+      <img class="app-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Canva_Logo.svg/250px-Canva_Logo.svg.png" alt="Canva" loading="lazy">
       <h4>Canva Pro / Adobe CC</h4>
       <p>Đầy đủ tính năng thiết kế chuyên nghiệp, kho asset khổng lồ.</p>
       <div class="app-price">Từ 80.000đ / tháng</div>
@@ -791,9 +797,40 @@
     </div>
 
     <div class="app-card reveal">
-      <span class="emoji">📦</span>
+      <img class="app-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/220px-Netflix_2015_logo.svg.png" alt="Netflix" loading="lazy">
+      <h4>Netflix Premium 4K</h4>
+      <p>Chất lượng 4K sắc nét, tài khoản cao cấp, không quảng cáo, xem không giới hạn.</p>
+      <div class="app-price">70.000đ / tháng</div>
+      <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
+    </div>
+
+    <div class="app-card reveal">
+      <img class="app-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Capcut-logo.svg/200px-Capcut-logo.svg.png" alt="CapCut" loading="lazy">
+      <h4>CapCut Pro</h4>
+      <p>Chỉnh sửa video chuyên nghiệp, đầy đủ template cao cấp, xuất video không watermark.</p>
+      <div class="app-price">40.000đ / tháng</div>
+      <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
+    </div>
+
+    <div class="app-card reveal">
+      <img class="app-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/HMA_Logo.png/200px-HMA_Logo.png" alt="HMA VPN" loading="lazy" onerror="this.style.display='none'">
+      <h4>HMA VPN – Key bản quyền</h4>
+      <p>VPN tốc độ cao, bảo mật tuyệt đối, vượt tường lửa, hàng nghìn server toàn cầu.</p>
+      <div class="app-price">40.000đ / tháng</div>
+      <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
+    </div>
+
+    <div class="app-card reveal">
+      <img class="app-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/200px-Google_Gemini_logo.svg.png" alt="Gemini" loading="lazy">
+      <h4>Gemini Advanced</h4>
+      <p>Truy cập Gemini Ultra của Google — AI mạnh nhất, hỗ trợ đa phương tiện, không giới hạn.</p>
+      <div class="app-price">50.000đ / 4 tháng</div>
+      <a href="#contact" class="btn btn-outline btn-sm">Đặt mua</a>
+    </div>
+
+    <div class="app-card reveal">
       <h4>Các App Khác</h4>
-      <p>Microsoft 365, Duolingo, Grammarly, VPN, Notion... và nhiều app khác theo yêu cầu.</p>
+      <p>Microsoft 365, Duolingo, Grammarly, Notion... và nhiều app khác theo yêu cầu.</p>
       <div class="app-price">Liên hệ báo giá</div>
       <a href="#contact" class="btn btn-outline btn-sm">Liên hệ</a>
     </div>
